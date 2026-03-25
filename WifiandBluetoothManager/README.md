@@ -93,15 +93,17 @@ https://drive.google.com/file/d/1d_XP0D7jw076p35UshRCZJJdvdGLjqGO/view?usp=shari
 
 ### Full System Overview
 
-![image-20260325232425826](/home/zee/snap/typora/112/.config/Typora/typora-user-images/image-20260325232425826.png)
+![image-20260325232425826](assets/image-20260325232425826.png)
+
+
 
 ### WifiManager Internal Structure
 
-![image-20260325232619206](/home/zee/snap/typora/112/.config/Typora/typora-user-images/image-20260325232619206.png)
+![image-20260325232619206](assets/image-20260325232619206.png)
 
 ### BluetoothManager Internal Structure
 
-![image-20260325233041304](/home/zee/snap/typora/112/.config/Typora/typora-user-images/image-20260325233041304.png)
+![image-20260325233041304](assets/image-20260325233041304.png)
 
 ---
 

@@ -7,11 +7,11 @@ featuring a responsive UI and keyboard support.
 
 ## 📸 Screenshots
 
-![image-20260326000537851](/home/zee/snap/typora/112/.config/Typora/typora-user-images/image-20260326000537851.png)
+![image-20260326000537851](assets/image-20260326000537851.png)
 
 ### Divide by zero error:
 
-![image-20260326000607767](/home/zee/snap/typora/112/.config/Typora/typora-user-images/image-20260326000607767.png)
+![image-20260326000607767](assets/image-20260326000607767.png)
 
 ---
 
