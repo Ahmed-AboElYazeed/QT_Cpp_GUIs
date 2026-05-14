@@ -4,7 +4,7 @@
 #include <QDebug>
 
 #include "settingsbackend/settingsmanager.h"
-#include "settingsbackend/wifinetwork.h"       // Needed for qRegisterMetaType
+// #include "settingsbackend/wifinetwork.h"       // Needed for qRegisterMetaType
 
 int main(int argc, char *argv[])
 {
