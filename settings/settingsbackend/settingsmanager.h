@@ -1,6 +1,8 @@
 #pragma once
 #include <QObject>
 #include "settingsbackend/wifimanager.h"
+#include "settingsbackend/soundmanager.h"
+#include "settingsbackend/bluetoothmanager.h"
 
 // ── Forward-declare future managers so the header compiles now ─────────────
 // Uncomment each class as you implement it in the next messages.
@@ -31,13 +33,11 @@ class SettingsManager : public QObject
 
     // Each sub-manager is a CONSTANT pointer property — the pointer never
     // changes after construction, only the object's own properties do.
-    Q_PROPERTY(WifiManager* wifi
-                   READ wifi
-                       CONSTANT)
+    Q_PROPERTY(WifiManager* wifi READ wifi CONSTANT)
 
     // ── Uncomment as you add each manager ─────────────────────────────────
-    // Q_PROPERTY(BluetoothManager* bluetooth READ bluetooth CONSTANT)
-    // Q_PROPERTY(VolumeManager*    volume    READ volume    CONSTANT)
+    Q_PROPERTY(BluetoothManager* bluetooth READ bluetooth CONSTANT)
+    Q_PROPERTY(SoundManager*    sound    READ sound    CONSTANT)
     // Q_PROPERTY(ThemeManager*     theme     READ theme     CONSTANT)
 
 public:
@@ -46,14 +46,13 @@ public:
     WifiManager* wifi() const { return m_wifi; }
 
     // ── Add getters here as you implement each manager ─────────────────────
-    // BluetoothManager* bluetooth() const { return m_bluetooth; }
-    // VolumeManager*    volume()    const { return m_volume; }
+    BluetoothManager* bluetooth() const { return m_bluetooth; }
+    SoundManager*    sound()    const { return m_sound; }
     // ThemeManager*     theme()     const { return m_theme; }
 
 private:
     WifiManager *m_wifi = nullptr;
-
-    // BluetoothManager *m_bluetooth = nullptr;
-    // VolumeManager    *m_volume    = nullptr;
+    BluetoothManager *m_bluetooth = nullptr;
+    SoundManager    *m_sound    = nullptr;
     // ThemeManager     *m_theme     = nullptr;
 };

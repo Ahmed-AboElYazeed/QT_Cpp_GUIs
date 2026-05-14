@@ -12,9 +12,7 @@ Item {
         SettingsManager.wifi.scan()
     }
 
-    // ---------------------------------------------------------------------
     // Toast notification
-    // ---------------------------------------------------------------------
     Rectangle {
         id: toastBar
         anchors {
@@ -52,9 +50,7 @@ Item {
         toastTimer.restart()
     }
 
-    // ---------------------------------------------------------------------
     // Password dialog for secured networks
-    // ---------------------------------------------------------------------
     Dialog {
         id: passwordDialog
         title: "Wi-Fi Password"
@@ -71,10 +67,7 @@ Item {
                 passwordField.text = ""
             }
         }
-
-        onRejected: {
-            passwordField.text = ""
-        }
+        onRejected: passwordField.text = ""
 
         ColumnLayout {
             spacing: Theme.spacingMedium
@@ -100,15 +93,11 @@ Item {
 
     Connections {
         target: SettingsManager.wifi
-
         function onConnectionResult(success, message) {
             showToast(success, message)
         }
     }
 
-    // ---------------------------------------------------------------------
-    // Main layout
-    // ---------------------------------------------------------------------
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: Theme.spacingLarge
@@ -134,7 +123,7 @@ Item {
                     checked: SettingsManager.wifi.enabled
 
                     onToggled: (value) => {
-                        SettingsManager.wifi.enabled = value
+                        SettingsManager.wifi.setEnabled(value)
                     }
                 }
             }

@@ -1,5 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+
 import "../theme"
 import "../components"
 
@@ -23,15 +25,17 @@ Item {
 
             SettingsRow {
                 label: "Master Volume"
-                description: "Current: " + Math.round(masterSlider.value) + "%"
+                description: "Current: " + SettingsManager.sound.masterVolume + "%"
 
                 StyledSlider {
                     id: masterSlider
                     from: 0
                     to: 100
-                    value: 75
+                    value: SettingsManager.sound.masterVolume
                     width: 200
-                    onValueChanged: console.log("Volume:", Math.round(value))
+
+                    // Use onMoved to avoid binding loops while dragging
+                    onMoved: SettingsManager.sound.setMasterVolume(Math.round(value))
                 }
             }
 
@@ -40,8 +44,8 @@ Item {
                 showDivider: false
 
                 StyledToggle {
-                    checked: false
-                    onToggled: (val) => console.log("Mute:", val)
+                    checked: SettingsManager.sound.mute
+                    onToggled: (val) => SettingsManager.sound.setMute(val)
                 }
             }
         }
@@ -57,9 +61,9 @@ Item {
                 StyledSlider {
                     from: 0
                     to: 100
-                    value: 60
+                    value: SettingsManager.sound.micVolume
                     width: 200
-                    onValueChanged: console.log("Mic:", Math.round(value))
+                    onMoved: SettingsManager.sound.setMicVolume(Math.round(value))
                 }
             }
         }

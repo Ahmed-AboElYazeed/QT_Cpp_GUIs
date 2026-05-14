@@ -9,6 +9,7 @@ set(CMAKE_AUTORCC ON)       # auto-compile .qrc resource files
 
 # ── Qt modules ───────────────────────────────────────────────────────────────
 # Add Qt6::Bluetooth, Qt6::Multimedia etc. as you implement each manager.
+find_package(ALSA REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS
     Core
     Gui
@@ -47,6 +48,8 @@ qt_add_qml_module(appsettings
         SOURCES settingsbackend/wifimanager.h settingsbackend/wifimanager.cpp
         SOURCES
         SOURCES
+        SOURCES settingsbackend/soundmanager.h settingsbackend/soundmanager.cpp
+        SOURCES settingsbackend/bluetoothmanager.h settingsbackend/bluetoothmanager.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -66,6 +69,7 @@ target_link_libraries(appsettings
         Qt6::Gui
         Qt6::Quick
         Qt6::DBus
+        ALSA::ALSA
         # Qt6::Bluetooth
         # Qt6::Multimedia
     )
