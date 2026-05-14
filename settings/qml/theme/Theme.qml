@@ -26,6 +26,7 @@ QtObject {
     property color success:        "#4caf50"
     property color warning:        "#ff9800"
     property color danger:         "#f44336"
+    property color surfaceVariant: "#ff9800"
 
     // --- Radii ---
     property int radiusSmall:  6

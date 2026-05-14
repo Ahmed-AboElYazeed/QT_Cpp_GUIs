@@ -45,7 +45,7 @@ qt_add_qml_module(appsettings
         SOURCES
         SOURCES settingsbackend/settingsmanager.h settingsbackend/settingsmanager.cpp
         SOURCES settingsbackend/wifimanager.h settingsbackend/wifimanager.cpp
-        SOURCES settingsbackend/wifinetworkmodel.h settingsbackend/wifinetworkmodel.cpp
+        SOURCES
         SOURCES
 )
 
