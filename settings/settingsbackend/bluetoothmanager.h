@@ -4,7 +4,8 @@
 #include <QObject>
 #include <QAbstractListModel>
 #include <QDBusObjectPath>
-#include <QDBusInterface>
+#include <QDBusPendingCallWatcher>
+#include <QSet>
 
 struct BluetoothDevice {
     QString name;
@@ -60,10 +61,13 @@ class BluetoothManager : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool                  enabled     READ enabled     WRITE setEnabled NOTIFY enabledChanged)
-    Q_PROPERTY(bool                  discovering READ discovering                  NOTIFY discoveringChanged)
-    Q_PROPERTY(QString               statusText  READ statusText                   NOTIFY statusTextChanged)
-    Q_PROPERTY(BluetoothDeviceModel* devices     READ devices     CONSTANT)
+    Q_PROPERTY(bool                  enabled     READ enabled
+                   WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool                  discovering READ discovering
+                   NOTIFY discoveringChanged)
+    Q_PROPERTY(QString               statusText  READ statusText
+                   NOTIFY statusTextChanged)
+    Q_PROPERTY(BluetoothDeviceModel* devices     READ devices CONSTANT)
 
 public:
     explicit BluetoothManager(QObject *parent = nullptr);
@@ -92,8 +96,6 @@ private slots:
                            const QVariantMap &interfaces);
     void onInterfacesRemoved(const QDBusObjectPath &path,
                              const QStringList &interfaces);
-
-    // FIX 1: two separate slots — adapter vs device — no cross-contamination
     void onAdapterPropertiesChanged(const QString &interface,
                                     const QVariantMap &changed,
                                     const QStringList &invalidated);
@@ -105,11 +107,9 @@ private:
     void    initDBus();
     QString findAdapterPath();
     void    loadExistingDevices();
-
-    // FIX 2: correct nested D-Bus deserialization
+    void    subscribeToDevice(const QString &devicePath);
     BluetoothDevice deviceFromDBusProps(const QString &path,
-                                        const QVariantMap &rawProps) const;
-    void subscribeToDevice(const QString &devicePath);
+                                        const QVariantMap &props) const;
     QString devicePathFromAddress(const QString &address) const;
     void    updateStatus();
 
@@ -118,6 +118,7 @@ private:
     bool                  m_discovering = false;
     QString               m_statusText;
     BluetoothDeviceModel  m_devices;
+    QSet<QString>         m_subscribedPaths;  // prevents duplicate subscriptions
 };
 
 #endif

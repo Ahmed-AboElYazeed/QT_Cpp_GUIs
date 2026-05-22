@@ -16,11 +16,16 @@ int main(int argc, char *argv[])
     // WifiNetwork is passed through signals — Qt's meta-object system needs
     // to know about it before the first signal fires.
     qRegisterMetaType<WifiNetwork>();
+    qRegisterMetaType<BluetoothDevice>();
 
     // WifiNetworkModel is used as a Q_PROPERTY type — register it for QML
     qmlRegisterUncreatableType<WifiNetworkModel>(
         "App.Models", 1, 0, "WifiNetworkModel",
         "WifiNetworkModel is created by WifiManager — do not instantiate from QML"
+        );
+    qmlRegisterUncreatableType<BluetoothDeviceModel>(
+        "App.Models", 1, 0, "BluetoothDeviceModel",
+        "BluetoothDeviceModel is created by BluetoothManager — do not instantiate from QML"
         );
 
     // ── 2. Instantiate the Backend ────────────────────────────────────────
